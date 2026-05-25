@@ -8,7 +8,9 @@ from pathlib import Path
 
 
 class ResourceLimits:
-    def __init__(self, cpu_time: int = 60, memory_mb: int = 512, disk_mb: int = 100):
+    def __init__(self, cpu_time: int = 60, memory_mb: int = 512, disk_mb: Optional[int] = None):
+        if disk_mb is not None:
+            raise ValueError("disk_mb limit is not currently supported")
         self.cpu_time = cpu_time
         self.memory_mb = memory_mb
         self.disk_mb = disk_mb
