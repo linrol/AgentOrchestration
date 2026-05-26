@@ -32,6 +32,15 @@ class TestConfig:
         assert data["key1"] == "value1"
         assert data["key2"] == "value2"
 
+    def test_invalid_keys(self):
+        config = Config()
+        invalid_keys = ["", "a..b", ".a", "a."]
+        for key in invalid_keys:
+            with pytest.raises(ValueError):
+                config.set(key, "value")
+            with pytest.raises(ValueError):
+                config.get(key)
+
 # 2019-02-01T18:58:35 update
 
 # 2019-07-31T13:45:15 update

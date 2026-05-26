@@ -33,6 +33,8 @@ class Config:
         current[parts[-1]] = value
 
     def get(self, key: str, default: Any = None) -> Any:
+        if not key or ".." in key or key.startswith(".") or key.endswith("."):
+            raise ValueError(f"Invalid config key: {key}")
         parts = key.split(".")
         current = self._data
         for part in parts:
@@ -45,6 +47,8 @@ class Config:
         return current
 
     def set(self, key: str, value: Any) -> None:
+        if not key or ".." in key or key.startswith(".") or key.endswith("."):
+            raise ValueError(f"Invalid config key: {key}")
         self._set_nested(key, value)
 
     def to_dict(self) -> Dict:
